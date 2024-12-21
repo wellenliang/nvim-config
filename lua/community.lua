@@ -38,4 +38,6 @@ return {
   { import = "astrocommunity.colorscheme.nightfox-nvim" },
   { import = "astrocommunity.colorscheme.night-owl-nvim" },
   { import = "astrocommunity.colorscheme.onedarkpro-nvim" },
+
+  { import = "astrocommunity.recipes.heirline-mode-text-statusline" },
 }
