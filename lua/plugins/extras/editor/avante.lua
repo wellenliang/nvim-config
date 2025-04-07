@@ -5,15 +5,45 @@ return {
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
     opts = {
-      provider = "deepseek",
+      provider = "siliconflow_qwen_coder_7b",
       vendors = {
+        -- siliconflow大模型市场
+        siliconflow_deepseek_v3 = {
+          __inherited_from = "openai",
+          endpoint = "https://api.siliconflow.cn/v1",
+          model = "deepseek-ai/DeepSeek-V3",
+          api_key_name = "SILICONFLOW_API_KEY",
+        },
+        siliconflow_qwen_coder_32b = {
+          __inherited_from = "openai",
+          endpoint = "https://api.siliconflow.cn/v1",
+          model = "Qwen/Qwen2.5-Coder-32B-Instruct",
+          api_key_name = "SILICONFLOW_API_KEY",
+        },
+        siliconflow_qwen_coder_7b = {
+          __inherited_from = "openai",
+          endpoint = "https://api.siliconflow.cn/v1",
+          model = "Qwen/Qwen2.5-Coder-7B-Instruct",
+          api_key_name = "SILICONFLOW_API_KEY",
+        },
+        -- deepseek 官方
         deepseek = {
           __inherited_from = "openai",
-          api_key_name = "sk-92a0d50929dd4786b8d9a240ed3b6e19",
+          api_key_name = "DEEPSEEK_API_KEY",
           endpoint = "https://api.deepseek.com",
-          model = "deepseek-coder",
+          model = "deepseek-chat",
         },
       },
+      behaviour = {
+        auto_suggestions = false, -- Experimental stage
+        auto_set_highlight_group = true,
+        auto_set_keymaps = true,
+        auto_apply_diff_after_generation = false,
+        support_paste_from_clipboard = false,
+        minimize_diff = true, -- Whether to remove unchanged lines when applying a code block
+        enable_token_counting = true, -- Whether to enable token counting. Default to true.
+      },
+      hints = { enabled = true },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = "make",
