@@ -5,26 +5,35 @@ return {
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
     opts = {
-      provider = "siliconflow_qwen_coder_7b",
+      provider = "siliconflow-deepseek-v3",
       vendors = {
         -- siliconflow大模型市场
-        siliconflow_deepseek_v3 = {
+        ["siliconflow-deepseek-v3"] = {
           __inherited_from = "openai",
           endpoint = "https://api.siliconflow.cn/v1",
           model = "deepseek-ai/DeepSeek-V3",
           api_key_name = "SILICONFLOW_API_KEY",
+          timeout = 3000, -- 超时时间（毫秒），增加此值以适应推理模型
+          temperature = 0.7,
+          max_tokens = 8192, -- 增加此值以包括推理模型的推理令牌
         },
-        siliconflow_qwen_coder_32b = {
+        ["siliconflow-qwen-coder-32b"] = {
           __inherited_from = "openai",
           endpoint = "https://api.siliconflow.cn/v1",
           model = "Qwen/Qwen2.5-Coder-32B-Instruct",
           api_key_name = "SILICONFLOW_API_KEY",
+          timeout = 3000, -- 超时时间（毫秒），增加此值以适应推理模型
+          temperature = 0.7,
+          max_tokens = 4096, -- 增加此值以包括推理模型的推理令牌
         },
-        siliconflow_qwen_coder_7b = {
+        siliconflow = {
           __inherited_from = "openai",
           endpoint = "https://api.siliconflow.cn/v1",
-          model = "Qwen/Qwen2.5-Coder-7B-Instruct",
+          model = "Qwen/Qwen2.5-32B-Instruct",
           api_key_name = "SILICONFLOW_API_KEY",
+          timeout = 3000, -- 超时时间（毫秒），增加此值以适应推理模型
+          temperature = 0.7,
+          max_tokens = 4096, -- 增加此值以包括推理模型的推理令牌
         },
         -- deepseek 官方
         deepseek = {
@@ -32,10 +41,13 @@ return {
           api_key_name = "DEEPSEEK_API_KEY",
           endpoint = "https://api.deepseek.com",
           model = "deepseek-chat",
+          timeout = 3000, -- 超时时间（毫秒），增加此值以适应推理模型
+          temperature = 0,
+          max_tokens = 8192, -- 增加此值以包括推理模型的推理令牌
         },
       },
       behaviour = {
-        auto_suggestions = false, -- Experimental stage
+        auto_suggestions = true, -- Experimental stage
         auto_set_highlight_group = true,
         auto_set_keymaps = true,
         auto_apply_diff_after_generation = false,
@@ -54,6 +66,7 @@ return {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
       --- The below dependencies are optional,
+      "ibhagwan/fzf-lua",
       "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
       "zbirenbaum/copilot.lua", -- for providers='copilot'
       {
